@@ -176,44 +176,137 @@ with tab2:
     if linha_desl:
         df_desl = df_desl[df_desl['LINHA DE CUIDADO'].isin(linha_desl)]
     
-    # Separar por Urgência/Emergência e APS
+    # ========== GRÁFICO GERAL - TODAS AS LINHAS DE CUIDADO ==========
+    st.subheader("📊 Visão Geral - Todos os Motivos de Desligamento")
+    motivos_geral = df_desl['MOTIVO DO DESLIGAMENTO'].value_counts().reset_index()
+    motivos_geral.columns = ['Motivo', 'Quantidade']
+    
+    if not motivos_geral.empty:
+        altura_geral = max(450, len(motivos_geral) * 35)
+        
+        fig_geral = px.bar(motivos_geral, x='Quantidade', y='Motivo', orientation='h',
+                          color='Quantidade', color_continuous_scale='Viridis',
+                          text='Quantidade')
+        fig_geral.update_traces(textposition='outside', textfont_size=12)
+        fig_geral.update_layout(
+            yaxis={'categoryorder':'total ascending'},
+            showlegend=False,
+            height=altura_geral,
+            margin=dict(r=60)
+        )
+        st.plotly_chart(fig_geral, use_container_width=True)
+    
+    st.markdown("---")
+    
+    # ========== DOIS GRÁFICOS PRINCIPAIS ==========
+    st.subheader("🏥 Principais Linhas de Cuidado")
     col_ue, col_aps = st.columns(2)
     
     with col_ue:
-        st.subheader("🚑 Urgência e Emergência")
-        # Filtrar linhas que contenham "Urgência" ou "Emergência"
+        st.markdown("**🚑 Urgência e Emergência**")
         df_ue = df_desl[df_desl['LINHA DE CUIDADO'].str.contains('Urgência|Emergência', case=False, na=False)]
         motivos_ue = df_ue['MOTIVO DO DESLIGAMENTO'].value_counts().reset_index()
         motivos_ue.columns = ['Motivo', 'Quantidade']
         
         if not motivos_ue.empty:
-            fig_ue = px.bar(motivos_ue.head(10), x='Quantidade', y='Motivo', orientation='h',
-                          color='Quantidade', color_continuous_scale='Reds')
-            fig_ue.update_layout(yaxis={'categoryorder':'total ascending'}, showlegend=False)
-            st.plotly_chart(fig_ue, use_container_width=True)
+            altura_ue = max(400, len(motivos_ue) * 35)
             
-            with st.expander("Ver tabela completa"):
-                st.dataframe(motivos_ue, use_container_width=True)
+            fig_ue = px.bar(motivos_ue, x='Quantidade', y='Motivo', orientation='h',
+                          color='Quantidade', color_continuous_scale='Reds',
+                          text='Quantidade')
+            fig_ue.update_traces(textposition='outside', textfont_size=12)
+            fig_ue.update_layout(
+                yaxis={'categoryorder':'total ascending'}, 
+                showlegend=False,
+                height=altura_ue,
+                margin=dict(r=50)
+            )
+            st.plotly_chart(fig_ue, use_container_width=True)
         else:
             st.info("Sem dados de desligamento para Urgência e Emergência")
     
     with col_aps:
-        st.subheader("🏥 Atenção Primária (APS)")
+        st.markdown("**🏥 Atenção Básica**")
         # Filtrar linhas que contenham "Atenção Básica" ou "Atenção Primária"
         df_aps = df_desl[df_desl['LINHA DE CUIDADO'].str.contains('Atenção Básica|Atenção Primária', case=False, na=False)]
         motivos_aps = df_aps['MOTIVO DO DESLIGAMENTO'].value_counts().reset_index()
         motivos_aps.columns = ['Motivo', 'Quantidade']
         
         if not motivos_aps.empty:
-            fig_aps = px.bar(motivos_aps.head(10), x='Quantidade', y='Motivo', orientation='h',
-                           color='Quantidade', color_continuous_scale='Blues')
-            fig_aps.update_layout(yaxis={'categoryorder':'total ascending'}, showlegend=False)
-            st.plotly_chart(fig_aps, use_container_width=True)
+            # Calcular altura dinâmica baseada na quantidade de motivos
+            altura_aps = max(400, len(motivos_aps) * 35)
             
-            with st.expander("Ver tabela completa"):
-                st.dataframe(motivos_aps, use_container_width=True)
+            fig_aps = px.bar(motivos_aps, x='Quantidade', y='Motivo', orientation='h',
+                           color='Quantidade', color_continuous_scale='Blues',
+                           text='Quantidade')
+            fig_aps.update_traces(textposition='outside', textfont_size=12)
+            fig_aps.update_layout(
+                yaxis={'categoryorder':'total ascending'}, 
+                showlegend=False,
+                height=altura_aps,
+                margin=dict(r=50)
+            )
+            st.plotly_chart(fig_aps, use_container_width=True)
         else:
-            st.info("Sem dados de desligamento para APS")
+            st.info("Sem dados de desligamento para Atenção Básica")
+    
+    st.markdown("---")
+    
+    # ========== OUTRAS LINHAS DE CUIDADO ==========
+    st.subheader("📋 Outras Linhas de Cuidado")
+    
+    # Filtrar linhas que NÃO são Urgência/Emergência nem Atenção Básica/Primária
+    df_outras = df_desl[
+        ~df_desl['LINHA DE CUIDADO'].str.contains('Urgência|Emergência|Atenção Básica|Atenção Primária', case=False, na=False)
+    ]
+    
+    # Obter linhas de cuidado únicas das outras e ordenar por quantidade de registros
+    outras_linhas = df_outras['LINHA DE CUIDADO'].value_counts().index.tolist()
+    outras_linhas = [lc for lc in outras_linhas if lc != 'Não Classificado']
+    
+    if len(outras_linhas) > 0:
+        # Calcular altura máxima para alinhar os gráficos
+        max_motivos = max([
+            len(df_outras[df_outras['LINHA DE CUIDADO'] == linha]['MOTIVO DO DESLIGAMENTO'].unique())
+            for linha in outras_linhas
+        ])
+        altura_padrao = max(300, max_motivos * 30)
+        
+        # Criar grid de gráficos menores (4 por linha para melhor alinhamento)
+        num_cols = 4
+        for i in range(0, len(outras_linhas), num_cols):
+            cols_outras = st.columns(num_cols)
+            for j, col in enumerate(cols_outras):
+                idx = i + j
+                if idx < len(outras_linhas):
+                    linha = outras_linhas[idx]
+                    with col:
+                        st.markdown(f"**{linha}**")
+                        df_linha_atual = df_outras[df_outras['LINHA DE CUIDADO'] == linha]
+                        motivos_linha = df_linha_atual['MOTIVO DO DESLIGAMENTO'].value_counts().reset_index()
+                        motivos_linha.columns = ['Motivo', 'Quantidade']
+                        
+                        if not motivos_linha.empty:
+                            fig_linha = px.bar(motivos_linha, x='Quantidade', y='Motivo', orientation='h',
+                                             color='Quantidade', color_continuous_scale='Teal',
+                                             text='Quantidade')
+                            fig_linha.update_traces(textposition='outside', textfont_size=9)
+                            fig_linha.update_layout(
+                                yaxis={'categoryorder':'total ascending'},
+                                showlegend=False,
+                                height=altura_padrao,
+                                margin=dict(l=5, r=35, t=5, b=5),
+                                coloraxis_showscale=False,
+                                xaxis_title='',
+                                yaxis_title=''
+                            )
+                            st.plotly_chart(fig_linha, use_container_width=True)
+                        else:
+                            st.info("Sem dados")
+    else:
+        st.info("Sem dados de desligamento para outras linhas de cuidado")
+    
+    st.markdown("---")
     
     # Comparativo geral por Linha de Cuidado
     st.subheader("📊 Comparativo Geral - Top 5 Motivos por Linha de Cuidado")
