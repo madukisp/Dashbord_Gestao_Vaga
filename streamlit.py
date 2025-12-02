@@ -344,4 +344,4 @@ with tab3:
 
 # Rodapé
 st.markdown("---")
-st.caption("📊 Dashboard de Indicadores RH | Fonte: Pasta1.xlsx")
+st.caption("📊 Dashboard de Indicadores RH")
