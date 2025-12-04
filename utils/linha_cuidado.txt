@@ -1,0 +1,130 @@
+URGENCIA E EMERGENCIA
+SAUDE MENTAL
+APS
+SAUDE DO IDOSO
+PROGRAMAS
+
+
+cetea entra como atenção primária aps - piaui
+central de exames urgência e emergência - piaui
+hospitais - hmc e piaui
+
+
+a - sim, o principal foco são os ultimos 6 meses mas tb se possivel pode deixar um filtro pelos anos passados para efeito de comparação com o cenário atual.
+
+b - pode classificar os níveis baseado na lista da imagem em anexo.
+
+c - a linha de cuidado se refere a:
+
+URGENCIA E EMERGENCIA 
+
+SAUDE MENTAL 
+
+APS 
+
+SAUDE DO IDOSO 
+
+PROGRAMAS 
+
+e não ao centro custo
+
+d - quero ambos em graficos separados, preciso analisar as admissões distintamente das demissões. Se possivel tb analisar se uma pessoa foi demitida e foi subistituida, por exemplo, enfermeiro na unidade tal foi demitido dia 01/11/2025 mas em 15/11/2025 começou outro enfermeiro na mesma unidade com a mesma escala mesmo horário e mesmo centro custo, da pra entender que essa vaga foi substituida em x numeros de dias.
+
+e - Tipo Rescisão
+
+f - não
+
+g - quero que calcule a média de permanecia e outro grafico com demitidos durante a experiencia de 45 e de 90 dias separadamente
+
+h - quero as duas sugestões
+
+i - total de nome fantasia:
+otal distintos: 25
+SBCD - AME CRI ZN
+SBCD - ANDRADINA AME
+SBCD - CANDIDO FERRAZ (HRSCF)
+SBCD - CENTRAL DE EXAMES DE PICOS
+SBCD - CENTRAL DE EXAMES VALENÇA
+SBCD - CER II SAO JOAO DO PIAUI
+SBCD - CETEA - PI
+SBCD - CUBATÃO - APS
+SBCD - GARÇA
+SBCD - HMC - CUBATÃO - NOVO
+SBCD - HOSP ITURAMA
+SBCD - HOSP JUSTINO LUZ
+SBCD - HOSP PICOS
+SBCD - HOSP REG EUSTAQUIO PORTELA
+SBCD - ITU RT
+SBCD - MOCAMBINHO
+SBCD - PAI ZN
+SBCD - PROMISSÃO AME
+SBCD - PRONTO ATENDIMENTO SAO VICENTE DE PAULO
+SBCD - REDE ASSIST. NORTE-SP
+SBCD - SEDE CORPORATIVA TERESINA
+SBCD - UPA DE SÃO RAIMUNDO NONATO
+SBCD - UPA DR THELMO JACAREÍ
+SBCD - UPA ITU
+SBCD - UPA PICOS
+pode começar mostrando todas mas precisa ter uma opção de seleção para ver individualmente
+
+j - os endereços eu ainda preciso buscar manualmente, pode usar o centro de cada cidade que tem no nome fantasia e se nao tiver nome da cidade pode colocar o centro de são PAULO
+nao precisa colocar o colaboradores do mapa, o mapa é só um enfeito pra bater o olho e saber de que região estamos vendo
+
+k - ambos
+
+1. AME, UPA, CER - URGENCIA E EMERGENCIA
+CETEA - APS
+HOSP, HMC, HRSCF, PRONTO ATENDIMENTO - HOSPITAIS
+ITU RT, SEDE CORPORATIVA TERESINA - SEDE COORPORATIVA
+PAI - SAUDE DO IDOSOCER - PROGRAMAS
+os que eu nao listei pode deixar como OUTROS e eu corrijo depois
+
+2. imediatamente a partir da data da rescisão, nao tem dia exato, pode ser 1 dia após ou no mesmo dia
+
+3.  Hospital Regional Senador Cândido Ferraz (HRSCF), em São Raimundo Nonato, no Piauí.
+CENTRAL DE EXAMES VALENÇA fica em Valença do Piauí, região do Vale do Sambito,
+SBCD CETEA - PI CETEA-PI (Centro Especializado de Atendimento às Pessoas com Transtorno do Espectro Autista do Piauí), gerido pela SBCD, fica em Teresina, capital do estado do Piauí.
+O resto está certo, qualquer coisa eu edito depois
+
+4. pode ser um slider de data
+
+5. pode manter as mesmas cores, está bonito do jeito que está
+
+
+  "ID": 153,
+  "Nome": "SILVANA LEITE DOS SANTOS SOUZA",
+  "Dt Admissão": "01/05/2016",
+  "Tipo Contrato": "CONTRATO PRAZO INDETERMINADO",
+  "Jornada": null,
+  "Agente Nocivo": "EXPOSIÇÃO A AGENTE NOCIVO (APOSENTADORIA ESPECIAL 25 ANOS DE TRABALHO)",
+  "Vinculo Empregatício": "10-Trab.Urbano",
+  "Categoria Trabalhador": "101-Empregado",
+  "Motivo Admissão": "Transferência por motivo de sucessão, incorporação, cisão ou fusão",
+  "Dt Nascimento": "20/10/1965",
+  "Sexo": "Feminino",
+  "CPF": 8730863848,
+  "Dt Rescisão": "17/03/2022",
+  "Demitido": "Sim",
+  "Tipo Rescisão": "01-DISPENSA SEM JUSTA CAUSA AVISO INDENIZADO",
+  "Dt Início Cargo": "01/05/2020",
+  "Código do Cargo": 1628,
+  "Cargo": "GERENTE DE UNIDADE",
+  "Função": null,
+  "CBO": 131210,
+  "Descrição CBO": "Gerente de serviços de saúde",
+  "Motivo Cargo": "ENQUADRAMENTO",
+  "Dt Início Centro de Custo": "01/03/2020",
+  "Código Centro de Custo": 77,
+  "Centro custo": "UBS VILA NIVI- ESF",
+  "Dt Início Empresa": "12/01/2022",
+  "Nome Fantasia": "SBCD - REDE ASSIST. NORTE-SP",
+  "Dt Início Escala": "10/03/2019",
+  "Dt Início Local de Trabalho": "01/03/2020",
+  "Local de Trabalho": "SBCD - Rede Assist. Norte-SP",
+  "Dt Início Situação": "17/03/2022",
+  "Situação": "99-Demitido",
+  "Dt Início Tipo Funcionário": "01/05/2016",
+  "Tipo Funcionário": "01 - Mensalista"
+}
+Good
+Bad
