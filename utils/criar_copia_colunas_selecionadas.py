@@ -7,7 +7,7 @@ def extrair_colunas_do_md(arquivo_md):
     """Extrai as colunas marcadas como 's' (sim) do arquivo markdown."""
     colunas_sim = []
 
-    with open(arquivo_md, 'r', encoding='utf-8') as f:
+    with open(arquivo_md, "r", encoding="utf-8") as f:
         conteudo = f.read()
 
     # Padrão: "Coluna 'nome' - Usar? (s/n): s"
@@ -16,7 +16,7 @@ def extrair_colunas_do_md(arquivo_md):
     matches = re.findall(padrao, conteudo)
 
     for coluna, resposta in matches:
-        if resposta.lower() == 's':
+        if resposta.lower() == "s":
             colunas_sim.append(coluna)
 
     return colunas_sim
@@ -66,9 +66,9 @@ def criar_copia_selecionada(arquivo_origem, arquivo_md, arquivo_destino):
 
 
 def main():
-    arquivo_md = 'colunas_db.md'
-    arquivo_origem = 'oris.xlsx'
-    arquivo_destino = 'oris_selecionado.xlsx'
+    arquivo_md = "colunas_db.md"
+    arquivo_origem = "oris.xlsx"
+    arquivo_destino = "oris_selecionado.xlsx"
 
     # Verificar se arquivos existem
     if not os.path.exists(arquivo_md):
@@ -81,5 +81,5 @@ def main():
     criar_copia_selecionada(arquivo_origem, arquivo_md, arquivo_destino)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

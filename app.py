@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import os
+import json
 
 st.set_page_config(
     page_title="Dashboard RH - Análise de Colaboradores", layout="wide", page_icon="📊"
@@ -34,21 +35,19 @@ st.markdown(
 
 # ============ CONFIGURAÇÕES ============
 
-# Classificação de Níveis (baseado na imagem fornecida)
-NIVEIS_HIERARQUIA = {
-    "DIRETOR": "DIRETOR",
-    "ASSESSOR": "ASSESSOR",
-    "SUPERVISOR": "SUPERVISOR",
-    "GERENTE": "GERENTE",
-    "COORDENADOR": "COORDENADOR",
-    "TECNICO": "TÉCNICO",
-    "MEDICO": "MÉDICOS",
-    "ENFERMAGEM": "ENFERMAGEM",
-    "MULTIDISCIPLINAR": "MULTIDISCIPLINAR",
-    "ADMINISTRATIVO": "ADMINISTRATIVO",
-    "OPERACIONAL": "OPERACIONAL",
-    "APRENDIZ": "APRENDIZ",
-}
+def load_cargos_niveis():
+    """Carrega o mapeamento de cargos do arquivo JSON."""
+    try:
+        with open('cargos_niveis.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        st.error("Arquivo 'cargos_niveis.json' não encontrado.")
+        return {}
+    except json.JSONDecodeError:
+        st.error("Erro ao decodificar o arquivo 'cargos_niveis.json'.")
+        return {}
+
+CARGOS_NIVEIS = load_cargos_niveis()
 
 # Mapeamento de cidades por Nome Fantasia
 CIDADES_MAPA = {
@@ -212,13 +211,7 @@ def classificar_nivel(cargo):
     if pd.isna(cargo):
         return "NÃO CLASSIFICADO"
 
-    cargo_upper = str(cargo).upper()
-
-    for palavra_chave, nivel in NIVEIS_HIERARQUIA.items():
-        if palavra_chave in cargo_upper:
-            return nivel
-
-    return "OUTROS"
+    return CARGOS_NIVEIS.get(cargo, "OUTROS")
 
 
 def classificar_linha_cuidado(nome_fantasia, centro_custo):
